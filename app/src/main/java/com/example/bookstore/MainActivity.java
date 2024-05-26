@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 ");");
         productDatabase.execSQL("CREATE TABLE IF NOT EXISTS task_list (\n" +
                 "    task_id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-                "    release_date DATE,\n" +
+                "    release_date DATE,\n" +//任務日期
                 "    task_content TEXT,\n" +
                 "    publisher_id VARCHAR(20),\n" +
                 "    number_of_recruits INT,\n" +
