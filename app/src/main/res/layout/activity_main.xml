@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn_search"
+        android:id="@+id/btn_search_book"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="search_book"

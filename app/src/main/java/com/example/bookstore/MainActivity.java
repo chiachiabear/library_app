@@ -24,12 +24,12 @@ public class MainActivity extends AppCompatActivity {
         ReplaceUserData();
         ReplaceBookData();
 
-        btn_search = findViewById(R.id.btn_search);
+        btn_search = findViewById(R.id.btn_search_book);
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(v.getId() == R.id.btn_search ){
+                if(v.getId() == R.id.btn_search_book){
                     Intent intent = new Intent();
                     intent.setClass(MainActivity.this, Search_book.class);
                     startActivity(intent);
