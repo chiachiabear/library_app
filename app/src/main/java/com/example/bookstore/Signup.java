@@ -3,7 +3,7 @@ package com.example.bookstore;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import java.util.UUID;
+
 import java.security.SecureRandom;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -37,7 +37,7 @@ public class Signup extends AppCompatActivity {
         etUserName=findViewById(R.id.et_username);
         etEmail=findViewById(R.id.et_email);
         btnSignUp = findViewById(R.id.btn_signup);
-        btnToLoginPage = findViewById(R.id.btn_to_login_page);
+        btnToLoginPage = findViewById(R.id.btn_to_signup_page);
         //MainActivity mainActivity = new MainActivity();
         lvProducts=findViewById(R.id.lv_products);
         productDatabase = openOrCreateDatabase("library",MODE_PRIVATE,null);
@@ -56,7 +56,7 @@ public class Signup extends AppCompatActivity {
                     Intent intent = new Intent();
                     intent.setClass(Signup.this, Login.class);
                     startActivity(intent);
-                }else if (v.getId() == R.id.btn_to_login_page){
+                }else if (v.getId() == R.id.btn_to_signup_page){
                     Intent intent = new Intent();
                     intent.setClass(Signup.this, Login.class);
                     startActivity(intent);

@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     private static SQLiteDatabase productDatabase;
 
     private Button btn_search;
+    private Button btnTaskPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +24,9 @@ public class MainActivity extends AppCompatActivity {
         CreateTabke();
         ReplaceUserData();
         ReplaceBookData();
-
+        ReplaceTaskData();
         btn_search = findViewById(R.id.btn_search_book);
-
+        btnTaskPage = findViewById(R.id.btn_task_page);
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -33,11 +34,15 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent();
                     intent.setClass(MainActivity.this, Search_book.class);
                     startActivity(intent);
+                } else if(v.getId() == R.id.btn_task_page){
+                    Intent intent = new Intent();
+                    intent.setClass(MainActivity.this, Task.class);
+                    startActivity(intent);
                 }
             }
         };
         btn_search.setOnClickListener(listener);
-
+        btnTaskPage.setOnClickListener(listener);
 
     }
 
@@ -75,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 "    FOREIGN KEY (Borrower_id) REFERENCES users(user_id)\n" +
                 ");");
         productDatabase.execSQL("CREATE TABLE IF NOT EXISTS task_list (\n" +
-                "    task_id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "    task_id VARCHAR(20) PRIMARY KEY AUTOINCREMENT,\n" +
                 "    release_date DATE,\n" +//任務日期
                 "    task_content TEXT,\n" +
                 "    publisher_id VARCHAR(20),\n" +
@@ -89,6 +94,12 @@ public class MainActivity extends AppCompatActivity {
                 "    FOREIGN KEY (receiver_id) REFERENCES users(user_id),\n" +
                 "    FOREIGN KEY (task_id) REFERENCES task_list(task_id)\n" +
                 ");");
+    }
+    private void ReplaceTaskData(){
+        productDatabase.execSQL("REPLACE INTO task_list (release_date, task_content, publisher_id, number_of_recruits) VALUES\n" +
+                "('2024-06-01','課輔小老師', 'u001', 3),\n" +
+                "('2024-06-01', '經驗分享', 'u002', 2);");
+
     }
     private void ReplaceUserData(){
         productDatabase.execSQL("REPLACE INTO users (user_id, password, name, phone, mail, department, grade)VALUES('u001', 'p0000001', 'John Doe', '1234567890', 'john@example.com', 'IT', 3),('u002', 'p0000002', 'Jane Smith', '9876543210', 'jane@example.com', 'HR', 2);");

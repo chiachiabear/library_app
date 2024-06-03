@@ -26,7 +26,7 @@ public class Login extends AppCompatActivity {
         etAccount = findViewById(R.id.et_account);
         etPassword = findViewById(R.id.et_password);
         btnLogin = findViewById(R.id.btn_login);
-        btnToSignPage = findViewById(R.id.btn_to_login_page);
+        btnToSignPage = findViewById(R.id.btn_to_signup_page);
         MainActivity mainActivity = new MainActivity();
         //productDatabase = mainActivity.getProductDatabase();
         productDatabase = openOrCreateDatabase("library",MODE_PRIVATE,null);
@@ -34,7 +34,7 @@ public class Login extends AppCompatActivity {
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(v.getId() == R.id.btn_to_login_page) {
+                if(v.getId() == R.id.btn_to_signup_page) {
                     Intent intent = new Intent();
                     intent.setClass(Login.this,Signup.class);
                     startActivity(intent);
