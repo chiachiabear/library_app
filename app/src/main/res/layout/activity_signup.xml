@@ -7,18 +7,27 @@
     android:outlineAmbientShadowColor="#3C1D1D"
     tools:context=".Signup">
 
+    <View
+        android:id="@+id/view"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:background="#ADC8A7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:text="帳號"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <Button
         android:id="@+id/btn_to_signup_page"
@@ -44,6 +53,7 @@
         android:outlineAmbientShadowColor="#0B0909"
         android:outlineSpotShadowColor="#291D1D"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -117,7 +127,7 @@
         android:id="@+id/lv_products"
         android:layout_width="417dp"
         android:layout_height="501dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_email" />
@@ -126,7 +136,7 @@
         android:id="@+id/btn_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#C0CDB8"
+        android:backgroundTint="#ACC7A6"
         android:text="Button"
         android:textColor="#4F4F4F"
         app:layout_constraintBottom_toTopOf="@+id/btn_to_signup_page"

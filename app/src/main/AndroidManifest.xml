@@ -19,7 +19,7 @@
             android:name=".show_book"
             android:exported="false" />
         <activity
-            android:name=".Task"
+            android:name=".Task_list"
             android:exported="false" />
         <activity
             android:name=".Signup"

@@ -1,49 +1,38 @@
 package com.example.bookstore;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+public class Task {
+    private String task_id, release_date, task_content, publisher_id;
+    private int number_of_recruits;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Bundle;
-import android.widget.CalendarView;
-import android.widget.ListView;
-import android.widget.TextView;
+    public Task(String task_id, String release_date, String task_content, String publisher_id, int number_of_recruits) {
+        this.task_id = task_id;
+        this.release_date = release_date;
+        this.task_content = task_content;
+        this.publisher_id = publisher_id;
+        this.number_of_recruits = number_of_recruits;
+    }
+    public Task(String task_id,String task_content) {
+        this.task_id = task_id;
+        this.task_content = task_content;
+    }
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+    public String getTask_id() {
+        return task_id;
+    }
 
-public class Task extends AppCompatActivity {
-    private CalendarView calendarView ;
-    private TextView tvTaskListDate;
-    private ListView lvTask;
-    private SQLiteDatabase productDatabase;
+    public String getRelease_date() {
+        return release_date;
+    }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_task);
-        productDatabase = openOrCreateDatabase("library",MODE_PRIVATE,null);
-        calendarView = findViewById(R.id.calendarView);
-        tvTaskListDate = findViewById(R.id.tv_task_list_date);
-        lvTask = findViewById(R.id.lv_task);
+    public String getTask_content() {
+        return task_content;
+    }
 
-        Calendar currentDate = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String formattedDate = sdf.format(currentDate.getTime());
-        tvTaskListDate.setText(formattedDate+"任務清單");
-        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                Calendar selectedDate = Calendar.getInstance();
-                selectedDate.set(year, month, dayOfMonth);
-                String formattedDate = sdf.format(selectedDate.getTime());
-                tvTaskListDate.setText(formattedDate+"任務清單");
+    public String getPublisher_id() {
+        return publisher_id;
+    }
 
-            }
-        });
-
+    public int getNumber_of_recruits() {
+        return number_of_recruits;
     }
 }
