@@ -29,7 +29,14 @@ public class Login extends AppCompatActivity {
         btnToSignPage = findViewById(R.id.btn_to_signup_page);
         MainActivity mainActivity = new MainActivity();
         //productDatabase = mainActivity.getProductDatabase();
+
         productDatabase = openOrCreateDatabase("library",MODE_PRIVATE,null);
+
+        mainActivity.CreateTabke(productDatabase);
+        mainActivity.ReplaceUserData(productDatabase);
+        mainActivity.ReplaceBookData(productDatabase);
+        mainActivity.ReplaceTaskData(productDatabase);
+
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
