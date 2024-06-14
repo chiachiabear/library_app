@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 "    FOREIGN KEY (book_id) REFERENCES books(book_id),\n" +
                 "    FOREIGN KEY (Borrower_id) REFERENCES users(user_id)\n" +
                 ");");
-        productDatabase.execSQL("Drop TABLE task_list;");
+
         productDatabase.execSQL("CREATE TABLE IF NOT EXISTS task_list (\n" +
                 "    task_id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                 "    release_date DATE,\n" +//任務日期
