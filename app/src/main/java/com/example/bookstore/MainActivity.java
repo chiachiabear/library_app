@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 "    FOREIGN KEY (task_id) REFERENCES task_list(task_id)\n" +
                 ");");
     }
-    private void ReplaceTaskData(SQLiteDatabase productDatabase){
+    public void ReplaceTaskData(SQLiteDatabase productDatabase){
         productDatabase.execSQL("REPLACE INTO task_list (release_date, task_start_time,task_end_time,task_content, publisher_id, number_of_recruits) VALUES\n" +
                 "('2024-06-02','07:00:00','08:00:00','課輔小老師', 'u001', 3),\n" +
                 "('2024-06-02','13:00:00','14:00:00','音樂', 'u001', 3),\n" +
