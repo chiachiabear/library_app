@@ -86,7 +86,7 @@
 
             <EditText
                 android:id="@+id/editTextPhone"
-                android:layout_width="408dp"
+                android:layout_width="340dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="phone number"
@@ -95,20 +95,6 @@
         </LinearLayout>
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:backgroundTint="#ADC8A7"
-        android:text="登出"
-        android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -155,5 +141,35 @@
             android:scaleType="centerInside"
             android:src="@drawable/user" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/sure"
+        android:layout_width="105dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="159dp"
+        android:backgroundTint="#ACC7A6"
+        android:text="儲存修改"
+        android:textColor="#040303"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="68dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#ADC8A7"
+        android:text="登出"
+        android:textColor="#000000"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
