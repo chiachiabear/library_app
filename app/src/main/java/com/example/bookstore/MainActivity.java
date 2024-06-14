@@ -21,16 +21,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         productDatabase = openOrCreateDatabase(DATABASE_NAME,MODE_PRIVATE,null);
-        CreateTabke();
-        ReplaceUserData();
-        ReplaceBookData();
-        ReplaceTaskData();
-        btn_search = findViewById(R.id.btn_search_book);
+        CreateTabke(productDatabase);
+        ReplaceUserData(productDatabase);
+        ReplaceBookData(productDatabase);
+        ReplaceTaskData(productDatabase);
+        btn_search = findViewById(R.id.btn_searchbook_page);
         btnTaskPage = findViewById(R.id.btn_task_page);
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(v.getId() == R.id.btn_search_book){
+                if(v.getId() == R.id.btn_searchbook_page){
                     Intent intent = new Intent();
                     intent.setClass(MainActivity.this, Search_book.class);
                     startActivity(intent);
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         return productDatabase;
     }
 
-    private void CreateTabke(){
+    public void CreateTabke(SQLiteDatabase productDatabase){
         productDatabase.execSQL("CREATE TABLE IF NOT EXISTS users (\n" +
                 "    user_id VARCHAR(20) PRIMARY KEY,\n" +
                 "    password VARCHAR(255),\n" +
@@ -95,16 +95,16 @@ public class MainActivity extends AppCompatActivity {
                 "    FOREIGN KEY (task_id) REFERENCES task_list(task_id)\n" +
                 ");");
     }
-    private void ReplaceTaskData(){
+    public void ReplaceTaskData(SQLiteDatabase productDatabase){
         productDatabase.execSQL("REPLACE INTO task_list (release_date, task_content, publisher_id, number_of_recruits) VALUES\n" +
                 "('2024-06-01','課輔小老師', 'u001', 3),\n" +
                 "('2024-06-01', '經驗分享', 'u002', 2);");
 
     }
-    private void ReplaceUserData(){
+    public void ReplaceUserData(SQLiteDatabase productDatabase){
         productDatabase.execSQL("REPLACE INTO users (user_id, password, name, phone, mail, department, grade)VALUES('u001', 'p0000001', 'John Doe', '1234567890', 'john@example.com', 'IT', 3),('u002', 'p0000002', 'Jane Smith', '9876543210', 'jane@example.com', 'HR', 2);");
     }
-    private void ReplaceBookData(){
+    public void ReplaceBookData(SQLiteDatabase productDatabase){
         productDatabase.execSQL("REPLACE INTO books (book_id, name, author, publication, publication_date, introduction, book_type, picture) VALUES\n" +
                 "('b000000001', '心靈的航程','Gracen Lee', 'Fantastic Reads', '2022-05-01', '一本令人著迷的奇幻小說', '奇幻', 'img01'),\n" +
                 "('b000000002', '永恆的諾言', 'Hannah Smith', 'Mystery House', '2021-03-15', '扣人心弦的懸疑故事', '懸疑', 'img02'),\n" +
