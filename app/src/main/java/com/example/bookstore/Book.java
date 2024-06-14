@@ -1,16 +1,18 @@
 package com.example.bookstore;
 
-public class Book {
-    private String ID,Name,Author,Date,Introduction,Type;
+import java.io.Serializable;
+
+public class Book implements Serializable {
+    private String ID,Name,Author,Date,Introduction,Type,publication;
     private int picture;
 
-    public Book(String ID, String name, String author, String date, String introduction, String type, int picture) {
-        this.ID = ID;
+    public Book(String name, String author, String date, String introduction, String type, String publication, int picture) {
         Name = name;
         Author = author;
         Date = date;
         Introduction = introduction;
         Type = type;
+        this.publication = publication;
         this.picture = picture;
     }
 
@@ -47,5 +49,9 @@ public class Book {
 
     public int getPicture() {
         return picture;
+    }
+
+    public String getPublication() {
+        return publication;
     }
 }
