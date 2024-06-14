@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/fragment_text_start_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:text="任務開始時間："
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/publish_tv_start_time"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="00:00:00"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_text_start_time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/fragment_text_start_time"
+        app:layout_constraintTop_toTopOf="@+id/fragment_text_start_time"
+        app:layout_constraintVertical_bias="0.653" />
+
+    <TextView
+        android:id="@+id/fragment_text_end_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="任務結束時間："
+        app:layout_constraintStart_toStartOf="@+id/fragment_text_start_time"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_text_start_time" />
+
+    <EditText
+        android:id="@+id/publish_tv_end_time"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="00:00:00"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_text_end_time"
+        app:layout_constraintEnd_toEndOf="@+id/publish_tv_start_time"
+        app:layout_constraintStart_toStartOf="@+id/publish_tv_start_time"
+        app:layout_constraintTop_toTopOf="@+id/fragment_text_end_time" />
+
+    <TextView
+        android:id="@+id/fragment_text_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="任務人數："
+        app:layout_constraintStart_toStartOf="@+id/fragment_text_end_time"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_text_end_time" />
+
+    <EditText
+        android:id="@+id/publish_tv_number"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_text_number"
+        app:layout_constraintEnd_toEndOf="@+id/publish_tv_end_time"
+        app:layout_constraintStart_toStartOf="@+id/publish_tv_end_time"
+        app:layout_constraintTop_toTopOf="@+id/fragment_text_number" />
+
+    <TextView
+        android:id="@+id/fragment_text_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="任務內容："
+        app:layout_constraintStart_toStartOf="@+id/fragment_text_number"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_text_number" />
+
+    <EditText
+        android:id="@+id/publish_tv_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_text_content"
+        app:layout_constraintEnd_toEndOf="@+id/publish_tv_number"
+        app:layout_constraintStart_toStartOf="@+id/publish_tv_number"
+        app:layout_constraintTop_toTopOf="@+id/fragment_text_content" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
