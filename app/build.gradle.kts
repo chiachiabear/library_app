@@ -3,8 +3,10 @@ plugins {
 }
 
 android {
+
     namespace = "com.example.bookstore"
     compileSdk = 34
+
 
     defaultConfig {
         applicationId = "com.example.bookstore"

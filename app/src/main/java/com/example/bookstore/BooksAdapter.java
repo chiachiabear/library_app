@@ -14,6 +14,9 @@ public class BooksAdapter extends BaseAdapter {
     private Context context;
     private List<Book> lvBooks;
 
+    public BooksAdapter() {
+    }
+
     public BooksAdapter(Context context, List<Book> lvBooks) {
         this.context = context;
         this.lvBooks = lvBooks;
