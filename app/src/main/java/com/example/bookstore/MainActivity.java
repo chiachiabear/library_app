@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btn_search;
     private Button btnTaskPage;
+    private Button btnPublishTaskPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +26,11 @@ public class MainActivity extends AppCompatActivity {
         ReplaceUserData(productDatabase);
         ReplaceBookData(productDatabase);
         ReplaceTaskData(productDatabase);
+        //productDatabase.execSQL("DELETE FROM task_list;");
         btn_search = findViewById(R.id.btn_searchbook_page);
         btnTaskPage = findViewById(R.id.btn_task_page);
+        btnPublishTaskPage = findViewById(R.id.btn_publish_task_page);
+
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,11 +42,16 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent();
                     intent.setClass(MainActivity.this, Task.class);
                     startActivity(intent);
+                }else if(v.getId() == R.id.btn_publish_task_page){
+                    Intent intent = new Intent();
+                    intent.setClass(MainActivity.this, Publish_Task.class);
+                    startActivity(intent);
                 }
             }
         };
         btn_search.setOnClickListener(listener);
         btnTaskPage.setOnClickListener(listener);
+        btnPublishTaskPage.setOnClickListener(listener);
 
     }
 
@@ -80,13 +89,17 @@ public class MainActivity extends AppCompatActivity {
                 "    FOREIGN KEY (Borrower_id) REFERENCES users(user_id)\n" +
                 ");");
         productDatabase.execSQL("CREATE TABLE IF NOT EXISTS task_list (\n" +
-                "    task_id VARCHAR(20) PRIMARY KEY AUTOINCREMENT,\n" +
+                "    task_id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                 "    release_date DATE,\n" +//任務日期
+                "    task_start_time TIME,\n" +
                 "    task_content TEXT,\n" +
+                "    task_end_time TIME,\n" +
                 "    publisher_id VARCHAR(20),\n" +
                 "    number_of_recruits INT,\n" +
                 "    FOREIGN KEY (publisher_id) REFERENCES users(user_id)\n" +
                 ");");
+        //productDatabase.execSQL("ALTER TABLE task_list ADD COLUMN task_start_time TIME DEFAULT '00:00:00';");
+        //productDatabase.execSQL("ALTER TABLE task_list ADD COLUMN task_end_time TIME DEFAULT '00:00:00';");
         productDatabase.execSQL("CREATE TABLE IF NOT EXISTS personal_tasks (\n" +
                 "    receiver_id VARCHAR(20),\n" +
                 "    task_id INT,\n" +
@@ -95,11 +108,17 @@ public class MainActivity extends AppCompatActivity {
                 "    FOREIGN KEY (task_id) REFERENCES task_list(task_id)\n" +
                 ");");
     }
-    public void ReplaceTaskData(SQLiteDatabase productDatabase){
-        productDatabase.execSQL("REPLACE INTO task_list (release_date, task_content, publisher_id, number_of_recruits) VALUES\n" +
-                "('2024-06-01','課輔小老師', 'u001', 3),\n" +
-                "('2024-06-01', '經驗分享', 'u002', 2);");
-
+    private void ReplaceTaskData(SQLiteDatabase productDatabase){
+        productDatabase.execSQL("REPLACE INTO task_list (release_date, task_start_time,task_end_time,task_content, publisher_id, number_of_recruits) VALUES\n" +
+                "('2024-06-02','07:00:00','08:00:00','課輔小老師', 'u001', 3),\n" +
+                "('2024-06-02','13:00:00','14:00:00','音樂', 'u001', 3),\n" +
+                "('2024-06-02','07:00:00','09:00:00','家政', 'u002', 3),\n" +
+                "('2024-06-06','16:00:00','17:00:00','體育', 'u001', 3),\n" +
+                "('2024-06-06','20:00:00','21:00:00','美勞', 'u002', 3),\n" +
+                "('2024-06-07','12:00:00','14:00:00','家政', 'u001', 1),\n" +
+                "('2024-06-07','07:00:00','08:00:00','課輔小老師', 'u001', 1),\n" +
+                "('2024-06-07','09:00:00','10:00:00','手做', 'u001', 3),\n" +
+                "('2024-06-07','19:00:00','20:00:00','數學小老師', 'u002', 2);");
     }
     public void ReplaceUserData(SQLiteDatabase productDatabase){
         productDatabase.execSQL("REPLACE INTO users (user_id, password, name, phone, mail, department, grade)VALUES('u001', 'p0000001', 'John Doe', '1234567890', 'john@example.com', 'IT', 3),('u002', 'p0000002', 'Jane Smith', '9876543210', 'jane@example.com', 'HR', 2);");

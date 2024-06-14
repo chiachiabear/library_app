@@ -16,6 +16,9 @@
             android:name=".Book_information"
             android:exported="false" />
         <activity
+            android:name=".Publish_Task"
+            android:exported="false" />
+        <activity
             android:name=".Personal_Information"
             android:exported="false" />
         <activity
@@ -35,9 +38,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- <activity -->
-        <!-- android:name=".BooksAdapter" -->
-        <!-- android:exported="false" /> -->
+        </activity>
+<!--        <activity-->
+<!--            android:name=".BooksAdapter"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".Search_book"
             android:exported="false" />
