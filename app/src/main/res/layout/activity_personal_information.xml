@@ -41,7 +41,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView11">
 
         <TextView
-            android:id="@+id/textView15"
+            android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="姓名"
@@ -49,21 +49,21 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/tv_class"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="系級"
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/textView13"
+            android:id="@+id/tv_id"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="學號"
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/textView14"
+            android:id="@+id/tv_account"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:text="帳號"
@@ -85,7 +85,7 @@
                 android:textSize="16sp" />
 
             <EditText
-                android:id="@+id/editTextPhone"
+                android:id="@+id/et_phone"
                 android:layout_width="340dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
