@@ -53,11 +53,11 @@ public class Task_list extends AppCompatActivity {
     }
 
     public void updateTaskList() {
-        Cursor cursor = productDatabase.rawQuery("SELECT task_id, task_content, number_of_recruits FROM task_list WHERE release_date = ?", new String[]{formattedDate});
+        Cursor cursor = productDatabase.rawQuery("SELECT task_id, task_content, task_start_time,task_end_time,number_of_recruits FROM task_list WHERE release_date = ?", new String[]{formattedDate});
         List<Task> tasks = new ArrayList<>();
         if (cursor.moveToFirst()) {
             do {
-                Task task = new Task(cursor.getString(0), cursor.getString(1),cursor.getInt(2));
+                Task task = new Task(cursor.getString(0), cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getInt(4));
                 tasks.add(task);
             } while (cursor.moveToNext());
         }

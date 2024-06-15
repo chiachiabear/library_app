@@ -92,9 +92,9 @@ public class MainActivity extends AppCompatActivity {
         productDatabase.execSQL("CREATE TABLE IF NOT EXISTS task_list (\n" +
                 "    task_id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                 "    release_date DATE,\n" +//任務日期
-                "    task_start_time TEXT,\n" +
+                "    task_start_time TIME,\n" +
                 "    task_content TEXT,\n" +
-                "    task_end_time TEXT,\n" +
+                "    task_end_time TIME,\n" +
                 "    publisher_id VARCHAR(20),\n" +
                 "    number_of_recruits INT,\n" +
                 "    FOREIGN KEY (publisher_id) REFERENCES users(user_id)\n" +
@@ -111,13 +111,13 @@ public class MainActivity extends AppCompatActivity {
     }
     public void ReplaceTaskData(SQLiteDatabase productDatabase){
         productDatabase.execSQL("REPLACE INTO task_list (release_date, task_start_time,task_end_time,task_content, publisher_id, number_of_recruits) VALUES\n" +
-                "('2024-06-02','07:00:00','08:00:00','課輔小老師', 'u001', 3),\n" +
+                /*"('2024-06-02','07:00:00','08:00:00','課輔小老師', 'u001', 3),\n" +
                 "('2024-06-02','13:00:00','14:00:00','音樂', 'u001', 3),\n" +
                 "('2024-06-02','07:00:00','09:00:00','家政', 'u002', 3),\n" +
                 "('2024-06-06','16:00:00','17:00:00','體育', 'u001', 3),\n" +
                 "('2024-06-06','20:00:00','21:00:00','美勞', 'u002', 3),\n" +
                 "('2024-06-07','12:00:00','14:00:00','家政', 'u001', 1),\n" +
-                "('2024-06-07','07:00:00','08:00:00','課輔小老師', 'u001', 1),\n" +
+                "('2024-06-07','07:00:00','08:00:00','課輔小老師', 'u001', 1),\n" +*/
                 "('2024-06-07','09:00:00','10:00:00','手做', 'u001', 3),\n" +
                 "('2024-06-07','19:00:00','20:00:00','數學小老師', 'u002', 2);");
     }

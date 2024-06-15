@@ -11,19 +11,21 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 
 import java.util.List;
-
-public class TasksAdapter extends BaseAdapter {
+public class PublishTasksAdapter extends BaseAdapter{
     private Context context;
     private List<Task> lvTasks;
     private String userId;
-    private Task_list activity;
+    private Publish_Task activity;
+    private Publish_Task.ListFragment listFragment;
 
-    public TasksAdapter(Context context, List<Task> lvTasks, String userId, Task_list activity) {
+    public PublishTasksAdapter(Context context, List<Task> lvTasks, String userId, Publish_Task activity, Publish_Task.ListFragment listFragment) {
         this.context = context;
         this.lvTasks = lvTasks;
         this.userId = userId;
         this.activity = activity;
+        this.listFragment = listFragment;
     }
+
 
     @Override
     public int getCount() {
@@ -39,6 +41,7 @@ public class TasksAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if(convertView == null){
@@ -55,32 +58,31 @@ public class TasksAdapter extends BaseAdapter {
         tvTaskTime.setText(task.getStart_time()+"~"+task.getEnd_time());
         tvTaskContent.setText(task.getTask_content());
         tvTaskNumber.setText(String.valueOf(task.getNumber_of_recruits()));
-
-        if (activity.isUserTask(userId, Integer.parseInt(task.getTask_id()))) {
-            btnAcceptTask.setText("取消任務");
+        if (task.getNumber_of_recruits() == 0) {
+            btnAcceptTask.setText("招募成功");
             convertView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorAcceptedTask));
         } else {
-            if (task.getNumber_of_recruits() == 0) {
-                btnAcceptTask.setText("已無餘額");
-            } else {
-                btnAcceptTask.setText("接受任務");
-            }
-            convertView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorDefaultTask));
+            btnAcceptTask.setText("取消發布");
         }
-
         btnAcceptTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (activity.isUserTask(userId, Integer.parseInt(task.getTask_id()))) {
-                    activity.removeFromPersonalTasks(userId, Integer.parseInt(task.getTask_id()));
-                } else if (task.getNumber_of_recruits() != 0) {
-                    activity.addToPersonalTasks(userId, Integer.parseInt(task.getTask_id()));
+
+
+                if (task.getNumber_of_recruits() == 0) {
+
+                } else {
+                    activity.removeFromTaskList(userId, Integer.parseInt(task.getTask_id()));
                 }
-                activity.updateTaskList();
-                //notifyDataSetChanged();
+
+                if (listFragment != null) {
+                    listFragment.updateTaskList();
+                }
+
             }
         });
 
         return convertView;
+
     }
 }
