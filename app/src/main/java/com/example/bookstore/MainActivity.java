@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else if(v.getId() == R.id.btn_task_page){
                     Intent intent = new Intent();
-                    intent.setClass(MainActivity.this, Task.class);
+                    intent.setClass(MainActivity.this, Task_list.class);
                     startActivity(intent);
                 }else if(v.getId() == R.id.btn_publish_task_page){
                     Intent intent = new Intent();

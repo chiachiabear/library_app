@@ -7,19 +7,42 @@
 
     <TextView
         android:id="@+id/tv_task_id"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="TextView"
         app:layout_constraintEnd_toStartOf="@+id/tv_task_content"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/btn_accept_task"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_task_content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="任務內容5551546"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="任務內容"
+        app:layout_constraintEnd_toStartOf="@+id/tv_task_number"
+        app:layout_constraintHorizontal_weight="5"
         app:layout_constraintStart_toEndOf="@+id/tv_task_id"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_accept_task"
+        style="@android:style/Widget.Holo.Light.Button.Borderless.Small"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="接受"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#2196F3"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_task_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="剩餘名額"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

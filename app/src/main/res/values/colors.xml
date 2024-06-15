@@ -2,4 +2,6 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="colorAcceptedTask">#FFCC80</color> <!-- 已接受任务的颜色 -->
+    <color name="colorDefaultTask">#FFFFFF</color> <!-- 默认任务的颜色 -->
 </resources>
