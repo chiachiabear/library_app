@@ -11,9 +11,10 @@ public class Task {
         this.publisher_id = publisher_id;
         this.number_of_recruits = number_of_recruits;
     }
-    public Task(String task_id,String task_content) {
+    public Task(String task_id,String task_content, int number_of_recruits) {
         this.task_id = task_id;
         this.task_content = task_content;
+        this.number_of_recruits = number_of_recruits;
     }
 
     public String getTask_id() {

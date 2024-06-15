@@ -3,6 +3,7 @@ package com.example.bookstore;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -27,16 +28,8 @@ public class Login extends AppCompatActivity {
         etPassword = findViewById(R.id.et_password);
         btnLogin = findViewById(R.id.btn_login);
         btnToSignPage = findViewById(R.id.btn_to_signup_page);
-        MainActivity mainActivity = new MainActivity();
-        //productDatabase = mainActivity.getProductDatabase();
 
         productDatabase = openOrCreateDatabase("library",MODE_PRIVATE,null);
-
-        mainActivity.CreateTabke(productDatabase);
-        mainActivity.ReplaceUserData(productDatabase);
-        mainActivity.ReplaceBookData(productDatabase);
-        mainActivity.ReplaceTaskData(productDatabase);
-
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -62,6 +55,7 @@ public class Login extends AppCompatActivity {
         if (cursor != null && cursor.moveToFirst()) {
             String userId = cursor.getString(0);
             Toast.makeText(this, "登录成功，用户ID：" + userId, Toast.LENGTH_LONG).show();
+            saveUserIDToPreferences(userId);
             Intent intent = new Intent(Login.this, MainActivity.class);
             startActivity(intent);
         } else {
@@ -70,6 +64,12 @@ public class Login extends AppCompatActivity {
         if (cursor != null) {
             cursor.close();
         }
-
     }
+    private void saveUserIDToPreferences(String userid) {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("userid", userid);
+        editor.apply();
+    }
+
 }

@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Bookstore"
         tools:targetApi="31">
         <activity
+            android:name=".Book_information"
+            android:exported="false" />
+        <activity
             android:name=".Publish_Task"
             android:exported="false" />
         <activity

@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else if(v.getId() == R.id.btn_task_page){
                     Intent intent = new Intent();
-                    intent.setClass(MainActivity.this, Task.class);
+                    intent.setClass(MainActivity.this, Task_list.class);
                     startActivity(intent);
                 }else if(v.getId() == R.id.btn_publish_task_page){
                     Intent intent = new Intent();
@@ -88,12 +88,13 @@ public class MainActivity extends AppCompatActivity {
                 "    FOREIGN KEY (book_id) REFERENCES books(book_id),\n" +
                 "    FOREIGN KEY (Borrower_id) REFERENCES users(user_id)\n" +
                 ");");
+
         productDatabase.execSQL("CREATE TABLE IF NOT EXISTS task_list (\n" +
                 "    task_id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                 "    release_date DATE,\n" +//任務日期
-                "    task_start_time TIME,\n" +
+                "    task_start_time TEXT,\n" +
                 "    task_content TEXT,\n" +
-                "    task_end_time TIME,\n" +
+                "    task_end_time TEXT,\n" +
                 "    publisher_id VARCHAR(20),\n" +
                 "    number_of_recruits INT,\n" +
                 "    FOREIGN KEY (publisher_id) REFERENCES users(user_id)\n" +
