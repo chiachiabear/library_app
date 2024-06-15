@@ -19,7 +19,7 @@
 
     <TextView
         android:id="@+id/tv_bookname"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
         android:layout_marginEnd="16dp"
@@ -31,18 +31,20 @@
 
     <TextView
         android:id="@+id/tv_bookauther"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="54dp"
+        android:layout_marginBottom="32dp"
         android:text="作者"
         android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_booktype"
         app:layout_constraintEnd_toEndOf="@+id/tv_bookname"
         app:layout_constraintStart_toStartOf="@+id/tv_bookname"
         app:layout_constraintTop_toBottomOf="@+id/tv_bookname" />
 
     <TextView
         android:id="@+id/tv_booktype"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="類型"
         android:textSize="24sp"
@@ -52,7 +54,7 @@
 
     <TextView
         android:id="@+id/tv_bookpublication"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:text="出版社"
@@ -62,22 +64,36 @@
 
     <TextView
         android:id="@+id/tv_bookpublicationdate"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="54dp"
+        android:layout_marginEnd="16dp"
         android:text="出版日期"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_bookpublication"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_bookpublication"
         app:layout_constraintTop_toTopOf="@+id/tv_bookpublication" />
 
     <TextView
         android:id="@+id/tv_bookintroduction"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
         android:text="介紹"
         android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/tv_bookpublication"
         app:layout_constraintTop_toBottomOf="@+id/tv_bookpublication" />
+
+    <Button
+        android:id="@+id/btn_back_searchpage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="上一頁"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,7 @@ package com.example.bookstore;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -18,7 +19,7 @@ public class Search_book extends AppCompatActivity {
 
     private ListView lvBook;
     private EditText etSearch;
-    private Button btnSearch;
+    private Button btnSearch,btnBackMainpage;
     private SQLiteDatabase productDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,7 @@ public class Search_book extends AppCompatActivity {
         lvBook = findViewById(R.id.lvbook);
         etSearch = findViewById(R.id.et_search);
         btnSearch = findViewById(R.id.search_btn);
-
+        btnBackMainpage = findViewById(R.id.btn_back_mainpage);
 
         productDatabase = openOrCreateDatabase("library",MODE_PRIVATE,null);
 
@@ -48,12 +49,16 @@ public class Search_book extends AppCompatActivity {
                     Cursor cursor = productDatabase.rawQuery(query, selectionArgs);
                     cursor.moveToFirst();
                     SearchBook(cursor);
+                }else if(v.getId() == R.id.btn_back_mainpage){
+                    Intent intent = new Intent();
+                    intent.setClass(Search_book.this,MainActivity.class);
+                    startActivity(intent);
                 }
             }
         };
 
         btnSearch.setOnClickListener(listener);
-
+        btnBackMainpage.setOnClickListener(listener);
 
     }
 
