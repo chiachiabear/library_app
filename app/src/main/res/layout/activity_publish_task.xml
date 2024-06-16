@@ -79,7 +79,7 @@
         android:layout_height="24dp"
         android:background="#ACC7A6"
         android:backgroundTint="#ACC7A6"
-        android:text="   任務清單"
+        android:text="我發布的任務清單"
         app:layout_constraintBottom_toTopOf="@+id/fragment_container"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calendarView2" />
@@ -118,7 +118,7 @@
         android:layout_height="29dp"
         android:background="#B89797"
         android:backgroundTint="#ACC7A6"
-        android:text="發布任務"
+        android:text="新增任務"
         android:textColor="#070606"
         android:textColorHighlight="#070606"
         android:textSize="8sp"

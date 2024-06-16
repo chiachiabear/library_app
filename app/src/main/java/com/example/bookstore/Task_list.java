@@ -3,10 +3,13 @@ package com.example.bookstore;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,6 +23,7 @@ public class Task_list extends AppCompatActivity {
     private CalendarView calendarView ;
     private TextView tvTaskListDate;
     private ListView lvTask;
+    private Button btnGotoPublish;
     private SQLiteDatabase productDatabase;
     private String formattedDate = "";
 
@@ -31,7 +35,7 @@ public class Task_list extends AppCompatActivity {
         calendarView = findViewById(R.id.calendarView);
         tvTaskListDate = findViewById(R.id.tv_task_list_date);
         lvTask = findViewById(R.id.lv_task);
-
+        btnGotoPublish = findViewById(R.id.btn_go_to_publish_task);
         Calendar currentDate = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         formattedDate = sdf.format(currentDate.getTime());
@@ -44,6 +48,16 @@ public class Task_list extends AppCompatActivity {
                 formattedDate = sdf.format(selectedDate.getTime());
                 tvTaskListDate.setText(formattedDate+"任務清單"+getUserIDFromPreferences());
                 updateTaskList();
+
+            }
+
+        });
+        btnGotoPublish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(Task_list.this, Publish_Task.class);
+                startActivity(intent);
             }
         });
     }
