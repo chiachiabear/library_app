@@ -29,12 +29,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class Publish_Task extends AppCompatActivity {
 
 
     private CalendarView calendarView;
     private TextView tvTaskListDate;
+    private TextView tvTaskPubliseDate;
     private String formattedDate;
 
     private Button BtnToText;
@@ -51,6 +53,7 @@ public class Publish_Task extends AppCompatActivity {
         calendarView = findViewById(R.id.calendarView2);
         BtnToText=findViewById(R.id.btn_to_text_fragment);
         tvTaskListDate = findViewById(R.id.tv_task_list_date2);
+        tvTaskPubliseDate = findViewById(R.id.tv_task_publish_date);
         Calendar currentDate = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         formattedDate = sdf.format(currentDate.getTime());
@@ -67,18 +70,47 @@ public class Publish_Task extends AppCompatActivity {
             }
         });
 
-
+        tvTaskPubliseDate.setText("已發布日期:"+getPublisherActiveTasks(this.getUserIDFromPreferences(),formattedDate));
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showTextFragment(formattedDate);
+                tvTaskPubliseDate.setText("已發布日期:"+getPublisherActiveTasks(getUserIDFromPreferences(),formattedDate));
             }
         };
         showListFragment(formattedDate);
         BtnToText.setOnClickListener(listener);
         showNavigationFragment();
+
     }
 
+    public String getPublisherActiveTasks(String userId, String today) {
+        StringBuilder activeTasks = new StringBuilder();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        SimpleDateFormat outputSdf = new SimpleDateFormat("MM-dd", Locale.getDefault());
+
+        String query = "SELECT DISTINCT release_date " +
+                "FROM task_list " +
+                "WHERE publisher_id = ? AND release_date >= ?" +
+                "ORDER BY release_date";
+        Cursor cursor = productDatabase.rawQuery(query, new String[]{userId, today});
+
+        if (cursor.moveToFirst()) {
+            do {
+                String taskDate = cursor.getString(0);
+                try {
+                    // 解析日期并转换格式
+                    String formattedDate = outputSdf.format(sdf.parse(taskDate));
+                    activeTasks.append(formattedDate).append(" ");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+
+        return activeTasks.toString().trim();
+    }
 
     // ListFragment
     public static class ListFragment extends Fragment {
