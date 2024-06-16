@@ -20,10 +20,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class Task_list extends AppCompatActivity {
     private CalendarView calendarView ;
     private TextView tvTaskListDate;
+    private TextView tvNoteTask;
     private ListView lvTask;
     private Button btnGotoPublish;
     private SQLiteDatabase productDatabase;
@@ -37,6 +39,7 @@ public class Task_list extends AppCompatActivity {
         calendarView = findViewById(R.id.calendarView);
         tvTaskListDate = findViewById(R.id.tv_task_list_date);
         lvTask = findViewById(R.id.lv_task);
+        tvNoteTask = findViewById(R.id.tv_task_note);
         btnGotoPublish = findViewById(R.id.btn_go_to_publish_task);
         Calendar currentDate = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -62,6 +65,7 @@ public class Task_list extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        tvNoteTask.setText("任務提醒:"+getUserActiveTasks(getUserIDFromPreferences(),formattedDate));
 
         showNavigationFragment();
     }
@@ -92,6 +96,7 @@ public class Task_list extends AppCompatActivity {
                 "UPDATE task_list SET number_of_recruits = number_of_recruits - 1 WHERE task_id = ?;",
                 new Object[]{taskId}
         );
+        tvNoteTask.setText("任務提醒:"+getUserActiveTasks(getUserIDFromPreferences(),formattedDate));
     }
 
     public void removeFromPersonalTasks(String receiverId, int taskId) {
@@ -103,6 +108,7 @@ public class Task_list extends AppCompatActivity {
                 "UPDATE task_list SET number_of_recruits = number_of_recruits + 1 WHERE task_id = ?;",
                 new Object[]{taskId}
         );
+        tvNoteTask.setText("任務提醒:"+getUserActiveTasks(getUserIDFromPreferences(),formattedDate));
     }
 
     public boolean isUserTask(String userId, int taskId) {
@@ -114,6 +120,45 @@ public class Task_list extends AppCompatActivity {
         cursor.close();
         return isAccepted;
     }
+    public boolean isFeatureTask(int taskId, String today) {
+        Cursor cursor = productDatabase.rawQuery(
+                "SELECT task_id FROM task_list WHERE task_id = ? AND release_date > ?;",
+                new String[]{String.valueOf(taskId), today}
+        );
+        boolean isTrue = cursor.moveToFirst();
+        cursor.close();
+        return isTrue;
+    }
+    public String getUserActiveTasks(String userId, String today) {
+        StringBuilder activeTasks = new StringBuilder();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        SimpleDateFormat outputSdf = new SimpleDateFormat("MM-dd", Locale.getDefault());
+
+        // 查询使用者的任务且未过期的任务
+        String query = "SELECT DISTINCT t.release_date " +
+                "FROM task_list t " +
+                "JOIN personal_tasks p ON t.task_id = p.task_id " +
+                "WHERE p.receiver_id = ? AND t.release_date >= ?" +
+                "ORDER BY t.release_date";
+        Cursor cursor = productDatabase.rawQuery(query, new String[]{userId, today});
+
+        if (cursor.moveToFirst()) {
+            do {
+                String taskDate = cursor.getString(0);
+                try {
+                    // 解析日期并转换格式
+                    String formattedDate = outputSdf.format(sdf.parse(taskDate));
+                    activeTasks.append(formattedDate).append(" ");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+
+        return activeTasks.toString().trim();
+    }
+
     public void showNavigationFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

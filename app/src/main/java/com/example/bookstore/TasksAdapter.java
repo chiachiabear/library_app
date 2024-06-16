@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class TasksAdapter extends BaseAdapter {
@@ -56,17 +58,25 @@ public class TasksAdapter extends BaseAdapter {
         tvTaskContent.setText(task.getTask_content());
         tvTaskNumber.setText(String.valueOf(task.getNumber_of_recruits()));
 
-        if (activity.isUserTask(userId, Integer.parseInt(task.getTask_id()))) {
-            btnAcceptTask.setText("取消任務");
-            convertView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorAcceptedTask));
-        } else {
-            if (task.getNumber_of_recruits() == 0) {
-                btnAcceptTask.setText("已無餘額");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String today = sdf.format(new Date());
+
+        if (activity.isFeatureTask(Integer.parseInt(task.getTask_id()), today)) {
+            if (activity.isUserTask(userId, Integer.parseInt(task.getTask_id()))) {
+                btnAcceptTask.setText("取消任務");
+                convertView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorAcceptedTask));
             } else {
-                btnAcceptTask.setText("接受任務");
+                if (task.getNumber_of_recruits() == 0) {
+                    btnAcceptTask.setText("已無餘額");
+                } else {
+                    btnAcceptTask.setText("接受任務");
+                }
+                convertView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorDefaultTask));
             }
-            convertView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorDefaultTask));
-        }
+            }else {
+                btnAcceptTask.setText("任務過期");
+                btnAcceptTask.setTextColor(ContextCompat.getColor(context, R.color.colorExTask));
+            }
 
         btnAcceptTask.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +87,6 @@ public class TasksAdapter extends BaseAdapter {
                     activity.addToPersonalTasks(userId, Integer.parseInt(task.getTask_id()));
                 }
                 activity.updateTaskList();
-                //notifyDataSetChanged();
             }
         });
 
