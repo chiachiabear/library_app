@@ -46,7 +46,7 @@ public class Task_list extends AppCompatActivity {
                 Calendar selectedDate = Calendar.getInstance();
                 selectedDate.set(year, month, dayOfMonth);
                 formattedDate = sdf.format(selectedDate.getTime());
-                tvTaskListDate.setText(formattedDate+"任務清單"+getUserIDFromPreferences());
+                tvTaskListDate.setText(formattedDate+"任務清單");
                 updateTaskList();
 
             }
