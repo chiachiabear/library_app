@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         CreateTabke(productDatabase);
         ReplaceUserData(productDatabase);
         ReplaceBookData(productDatabase);
-        ReplaceTaskData(productDatabase);
+        //ReplaceTaskData(productDatabase);
         //productDatabase.execSQL("DELETE FROM task_list;");
 
         lvBook = findViewById(R.id.lv_mainpage_show_book);
@@ -72,18 +72,12 @@ public class MainActivity extends AppCompatActivity {
         Image2.setImageResource(R.drawable.green_seed);
         Image3.setImageResource(R.drawable.scallion_duck);
 
-
-
         Cursor cursor = productDatabase.rawQuery("SELECT name,author,publication_date,introduction,book_type,publication,picture FROM books",null);
         cursor.moveToFirst();
 
         SearchBook(cursor);
 
-
-
         showNavigationFragment();
-
-
 
     }
     public static class MainNavigationFragment extends Fragment {
@@ -97,8 +91,6 @@ public class MainActivity extends AppCompatActivity {
             ImageButton btnSearch = view.findViewById(R.id.btn_searchbook_navigate);
             ImageButton btnCalendar = view.findViewById(R.id.btn_calendar);
             ImageButton btnPersonal = view.findViewById(R.id.btn_personal);
-
-
 
             View.OnClickListener listener = new View.OnClickListener() {
                 @Override
@@ -213,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
                 "('2024-06-07','12:00:00','14:00:00','家政', 'u001', 1),\n" +
                 "('2024-06-07','07:00:00','08:00:00','課輔小老師', 'u001', 1),\n" +*/
                 "('2024-06-07','09:00:00','10:00:00','手做', 'u001', 3),\n" +
-                "('2024-06-07','19:00:00','20:00:00','數學小老師', 'u002', 2);");
+                "('2024-06-08','19:00:00','20:00:00','數學小老師', 'u002', 2);");
     }
     public void ReplaceUserData(SQLiteDatabase productDatabase){
         productDatabase.execSQL("REPLACE INTO users (user_id, password, name, phone, mail, department, grade)VALUES('u001', 'p0000001', 'John Doe', '1234567890', 'john@example.com', 'IT', 3),('u002', 'p0000002', 'Jane Smith', '9876543210', 'jane@example.com', 'HR', 2);");

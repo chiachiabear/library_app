@@ -18,17 +18,16 @@
 
     <ListView
         android:id="@+id/lv_mainpage_show_book"
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="478dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/frag_main"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/main_iv_2" />
 
     <FrameLayout
         android:id="@+id/frag_main"
@@ -44,33 +43,48 @@
 
     <ImageView
         android:id="@+id/main_iv_1"
-        android:layout_width="157dp"
-        android:layout_height="121dp"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/main_iv_2"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/main_iv_2"
         app:srcCompat="@drawable/walkleaf" />
 
     <ImageView
         android:id="@+id/main_iv_2"
-        android:layout_width="136dp"
-        android:layout_height="106dp"
-        android:layout_marginStart="7dp"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="14dp"
         app:layout_constraintBottom_toTopOf="@+id/lv_mainpage_show_book"
         app:layout_constraintEnd_toStartOf="@+id/main_iv_3"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@+id/main_iv_1"
         app:layout_constraintTop_toBottomOf="@+id/view"
         app:srcCompat="@drawable/green_seed" />
 
     <ImageView
         android:id="@+id/main_iv_3"
-        android:layout_width="149dp"
-        android:layout_height="93dp"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/main_iv_2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintTop_toTopOf="@+id/main_iv_2"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/scallion_duck" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="主頁"
+        android:textAlignment="center"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
