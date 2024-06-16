@@ -6,8 +6,13 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.GridView;
 
 public class show_book extends AppCompatActivity {
+    private Button btnSet;
+    private GridView gView;
+
 
     private SQLiteDatabase productDatabase;
 
@@ -17,6 +22,8 @@ public class show_book extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_book);
+        btnSet = findViewById(R.id.btn_set);
+        gView = findViewById(R.id.g_view);
 
 
         showNavigationFragment();
