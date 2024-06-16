@@ -315,7 +315,7 @@ public class MainActivity extends AppCompatActivity {
     private void SearchBook(Cursor cursor){
         List<Book> books = new ArrayList<>();
         for(int i = 0; i < cursor.getCount(); i++){
-            Book book = new Book(cursor.getString(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),R.drawable.img01);
+            Book book = new Book(cursor.getString(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),cursor.getString(6),R.drawable.img01);
             books.add(book);
             cursor.moveToNext();
         }

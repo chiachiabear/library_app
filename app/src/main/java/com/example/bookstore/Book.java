@@ -6,7 +6,8 @@ public class Book implements Serializable {
     private String ID,Name,Author,Date,Introduction,Type,publication;
     private int picture;
 
-    public Book(String name, String author, String date, String introduction, String type, String publication, int picture) {
+    public Book(String ID, String name, String author, String date, String introduction, String type, String publication, int picture) {
+        this.ID = ID;
         Name = name;
         Author = author;
         Date = date;
