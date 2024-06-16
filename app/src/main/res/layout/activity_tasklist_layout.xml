@@ -10,27 +10,29 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="時間"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_accept_task"
         app:layout_constraintEnd_toStartOf="@+id/tv_task_content"
         app:layout_constraintHorizontal_weight="4"
         app:layout_constraintStart_toEndOf="@+id/btn_accept_task"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/btn_accept_task" />
 
     <TextView
         android:id="@+id/tv_task_content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="任務內容"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_task_time"
         app:layout_constraintEnd_toStartOf="@+id/tv_task_number"
         app:layout_constraintHorizontal_weight="5"
         app:layout_constraintStart_toEndOf="@+id/tv_task_time"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/tv_task_time" />
 
     <Button
         android:id="@+id/btn_accept_task"
         style="@android:style/Widget.Holo.Light.Button.Borderless.Small"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="接受"
+        android:text="接受任務"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:textColor="#2196F3"
         app:layout_constraintHorizontal_weight="1"
@@ -39,10 +41,11 @@
 
     <TextView
         android:id="@+id/tv_task_number"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="剩餘名額"
+        android:text="餘額"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_task_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_weight="2"
+        app:layout_constraintTop_toTopOf="@+id/tv_task_content" />
 </androidx.constraintlayout.widget.ConstraintLayout>
