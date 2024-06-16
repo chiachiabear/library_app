@@ -24,10 +24,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
-        <GridView
+         <GridView
             android:id="@+id/g_view"
             android:layout_width="match_parent"
-            android:layout_height="492dp"
+            android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"

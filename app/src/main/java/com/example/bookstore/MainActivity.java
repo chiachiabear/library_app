@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     else if(v.getId()==R.id.btn_personal){
                         Intent intent = new Intent();
-                        intent.setClass(getActivity(), Personal_Information.class);
+                        intent.setClass(getActivity(), show_book.class);
                         startActivity(intent);
                     }
                 }
