@@ -108,6 +108,16 @@ public class MainActivity extends AppCompatActivity {
                 "    FOREIGN KEY (receiver_id) REFERENCES users(user_id),\n" +
                 "    FOREIGN KEY (task_id) REFERENCES task_list(task_id)\n" +
                 ");");
+
+        productDatabase.execSQL("CREATE TABLE IF NOT EXISTS user_borrowing (\n" +
+                "    borrowing_id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "    user_id VARCHAR(20),\n" +
+                "    book_id VARCHAR(12),\n" +
+                "    borrowing_date DATE,\n" +
+                "    return_date DATE,\n" +
+                "    FOREIGN KEY (user_id) REFERENCES users(user_id),\n" +
+                "    FOREIGN KEY (book_id) REFERENCES books(book_id)\n" +
+                ");");
     }
     public void ReplaceTaskData(SQLiteDatabase productDatabase){
         productDatabase.execSQL("REPLACE INTO task_list (release_date, task_start_time,task_end_time,task_content, publisher_id, number_of_recruits) VALUES\n" +
