@@ -1,6 +1,8 @@
 package com.example.bookstore;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -29,7 +31,7 @@ public class Search_book extends AppCompatActivity {
         lvBook = findViewById(R.id.lvbook);
         etSearch = findViewById(R.id.et_search);
         btnSearch = findViewById(R.id.search_btn);
-        btnBackMainpage = findViewById(R.id.btn_back_mainpage);
+
 
         productDatabase = openOrCreateDatabase("library",MODE_PRIVATE,null);
 
@@ -49,17 +51,21 @@ public class Search_book extends AppCompatActivity {
                     Cursor cursor = productDatabase.rawQuery(query, selectionArgs);
                     cursor.moveToFirst();
                     SearchBook(cursor);
-                }else if(v.getId() == R.id.btn_back_mainpage){
-                    Intent intent = new Intent();
-                    intent.setClass(Search_book.this,MainActivity.class);
-                    startActivity(intent);
                 }
             }
         };
 
         btnSearch.setOnClickListener(listener);
-        btnBackMainpage.setOnClickListener(listener);
+        showNavigationFragment();
 
+    }
+
+
+    public void showNavigationFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frag_navigation_show_book, new MainActivity.MainNavigationFragment());
+        fragmentTransaction.commit();
     }
 
     private void SearchBook(Cursor cursor){

@@ -38,9 +38,10 @@ public class Book_information extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(v.getId() == R.id.btn_back_searchpage){
-                    Intent intent = new Intent();
+                    /*Intent intent = new Intent();
                     intent.setClass(Book_information.this,Search_book.class);
-                    startActivity(intent);
+                    startActivity(intent);*/
+                    finish();
                 }
             }
         };

@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.util.Log;
 
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -21,8 +20,7 @@ import android.widget.CalendarView;
 import android.widget.ListView;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentTransaction;
+
 import android.view.View;
 import android.widget.ArrayAdapter;
 
@@ -43,7 +41,7 @@ public class Publish_Task extends AppCompatActivity {
     //private ListView lvTask;
     private static SQLiteDatabase productDatabase;
 
-    private static FragmentManager fragmentManager;
+    public static FragmentManager fragmentManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +76,7 @@ public class Publish_Task extends AppCompatActivity {
         };
         showListFragment(formattedDate);
         BtnToText.setOnClickListener(listener);
+        showNavigationFragment();
     }
 
 
@@ -220,6 +219,12 @@ public class Publish_Task extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, textFragment);
         fragmentTransaction.addToBackStack(null); // 将事务添加到返回栈，使得可以返回到 ListFragment
+        fragmentTransaction.commit();
+    }
+    public void showNavigationFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frag_publish_task, new MainActivity.MainNavigationFragment());
         fragmentTransaction.commit();
     }
     private String getUserIDFromPreferences() {

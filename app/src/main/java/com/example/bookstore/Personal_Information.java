@@ -1,6 +1,8 @@
 package com.example.bookstore;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -25,7 +27,13 @@ public class Personal_Information extends AppCompatActivity {
 
         productDatabase = openOrCreateDatabase("library",MODE_PRIVATE,null);
 
-
+        showNavigationFragment();
+    }
+    public void showNavigationFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frag_personal, new MainActivity.MainNavigationFragment());
+        fragmentTransaction.commit();
     }
 
 

@@ -2,6 +2,8 @@ package com.example.bookstore;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -46,6 +48,8 @@ public class Task_list extends AppCompatActivity {
                 updateTaskList();
             }
         });
+
+        showNavigationFragment();
     }
     private String getUserIDFromPreferences() {
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
@@ -95,6 +99,12 @@ public class Task_list extends AppCompatActivity {
         boolean isAccepted = cursor.moveToFirst();
         cursor.close();
         return isAccepted;
+    }
+    public void showNavigationFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frag_task_list, new MainActivity.MainNavigationFragment());
+        fragmentTransaction.commit();
     }
 
 }

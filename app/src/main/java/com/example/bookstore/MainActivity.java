@@ -1,12 +1,31 @@
 package com.example.bookstore;
 
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+import android.widget.ImageView;
+
 
 public class MainActivity extends AppCompatActivity {
     private static final String DATABASE_NAME = "library";
@@ -15,6 +34,21 @@ public class MainActivity extends AppCompatActivity {
     private Button btn_search;
     private Button btnTaskPage;
     private Button btnPublishTaskPage;
+
+    private ImageButton btnHome;
+    private ImageButton btnSearch;
+    private ImageButton btnCalendar;
+    private ImageButton btnPersonal;
+
+    private ListView lvBook;
+    private EditText etSearch;
+
+
+    private ImageView Image1;
+    private ImageView Image2;
+    private ImageView Image3;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,34 +61,84 @@ public class MainActivity extends AppCompatActivity {
         ReplaceBookData(productDatabase);
         ReplaceTaskData(productDatabase);
         //productDatabase.execSQL("DELETE FROM task_list;");
-        btn_search = findViewById(R.id.btn_searchbook_page);
-        btnTaskPage = findViewById(R.id.btn_task_page);
-        btnPublishTaskPage = findViewById(R.id.btn_publish_task_page);
 
-        View.OnClickListener listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(v.getId() == R.id.btn_searchbook_page){
-                    Intent intent = new Intent();
-                    intent.setClass(MainActivity.this, Search_book.class);
-                    startActivity(intent);
-                } else if(v.getId() == R.id.btn_task_page){
-                    Intent intent = new Intent();
-                    intent.setClass(MainActivity.this, Task_list.class);
-                    startActivity(intent);
-                }else if(v.getId() == R.id.btn_publish_task_page){
-                    Intent intent = new Intent();
-                    intent.setClass(MainActivity.this, Publish_Task.class);
-                    startActivity(intent);
-                }
-            }
-        };
-        btn_search.setOnClickListener(listener);
-        btnTaskPage.setOnClickListener(listener);
-        btnPublishTaskPage.setOnClickListener(listener);
+        lvBook = findViewById(R.id.lv_mainpage_show_book);
+
+        Image1 =findViewById(R.id.main_iv_1);
+        Image2 =findViewById(R.id.main_iv_2);
+        Image3 =findViewById(R.id.main_iv_3);
+
+        Image1.setImageResource(R.drawable.walkleaf);
+        Image2.setImageResource(R.drawable.green_seed);
+        Image3.setImageResource(R.drawable.scallion_duck);
+
+
+
+        Cursor cursor = productDatabase.rawQuery("SELECT name,author,publication_date,introduction,book_type,publication,picture FROM books",null);
+        cursor.moveToFirst();
+
+        SearchBook(cursor);
+
+
+
+        showNavigationFragment();
+
+
 
     }
+    public static class MainNavigationFragment extends Fragment {
 
+        @Nullable
+        @Override
+        public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+            View view = inflater.inflate(R.layout.fragment_navigation, container, false);
+
+            ImageButton btnHome= view.findViewById(R.id.btn_home);
+            ImageButton btnSearch = view.findViewById(R.id.btn_searchbook_navigate);
+            ImageButton btnCalendar = view.findViewById(R.id.btn_calendar);
+            ImageButton btnPersonal = view.findViewById(R.id.btn_personal);
+
+
+
+            View.OnClickListener listener = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+                    if(v.getId()==R.id.btn_home){
+                        Intent intent = new Intent();
+                        intent.setClass(getActivity(), MainActivity.class);
+                        startActivity(intent);
+                    }else if(v.getId()==R.id.btn_searchbook_navigate){
+                        Intent intent = new Intent();
+                        intent.setClass(getActivity(), Search_book.class);
+                        startActivity(intent);
+                    }
+                    else if(v.getId()==R.id.btn_calendar){
+                        Intent intent = new Intent();
+                        intent.setClass(getActivity(), Task_list.class);
+                        startActivity(intent);
+                    }
+                    else if(v.getId()==R.id.btn_personal){
+                        Intent intent = new Intent();
+                        intent.setClass(getActivity(), Personal_Information.class);
+                        startActivity(intent);
+                    }
+                }
+            };
+            btnHome.setOnClickListener(listener);
+            btnSearch.setOnClickListener(listener);
+            btnCalendar.setOnClickListener(listener);
+            btnPersonal.setOnClickListener(listener);
+            return view;
+        }
+    }
+    public void showNavigationFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frag_main, new MainNavigationFragment());
+        fragmentTransaction.commit();
+    }
     public SQLiteDatabase getProductDatabase() {
         return productDatabase;
     }
@@ -225,5 +309,15 @@ public class MainActivity extends AppCompatActivity {
                 "('b000000098', '夢想的實現', 'Kazuo Ishiguro', 'Faber and Faber', '2005-03-03', '一個探討人性與命運的故事', '科幻', 'img98'),\n" +
                 "('b000000099', '未來的光輝', 'Donna Tartt', 'Little, Brown and Company', '1992-09-04', '關於青少年犯罪的懸疑小說', '懸疑', 'img99'),\n" +
                 "('b000000100', '光陰的故事', 'Hanya Yanagihara', 'Doubleday', '2015-03-10', '一段深刻的友誼與創傷的故事', '小說', 'img100');");
+    }
+    private void SearchBook(Cursor cursor){
+        List<Book> books = new ArrayList<>();
+        for(int i = 0; i < cursor.getCount(); i++){
+            Book book = new Book(cursor.getString(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),R.drawable.img01);
+            books.add(book);
+            cursor.moveToNext();
+        }
+        BooksAdapter adapter = new BooksAdapter(this,books);
+        lvBook.setAdapter(adapter);
     }
 }
