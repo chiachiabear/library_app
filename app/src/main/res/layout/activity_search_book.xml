@@ -36,7 +36,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
+        android:backgroundTint="#A2BB9C"
         android:text="search"
+        android:textColor="#070707"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/et_search"
         app:layout_constraintTop_toTopOf="@+id/et_search" />
@@ -44,7 +46,7 @@
     <FrameLayout
         android:id="@+id/frag_navigation_show_book"
         android:layout_width="409dp"
-        android:layout_height="80dp"
+        android:layout_height="70dp"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
