@@ -36,8 +36,8 @@ public class Publish_Task extends AppCompatActivity {
 
     private CalendarView calendarView;
     private TextView tvTaskListDate;
-    private TextView tvTaskPubliseDate;
-    private String formattedDate;
+    public static TextView tvTaskPubliseDate;
+    public String formattedDate;
 
     private Button BtnToText;
     //private ListView lvTask;
@@ -84,7 +84,7 @@ public class Publish_Task extends AppCompatActivity {
 
     }
 
-    public String getPublisherActiveTasks(String userId, String today) {
+    public static String getPublisherActiveTasks(String userId, String today) {
         StringBuilder activeTasks = new StringBuilder();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         SimpleDateFormat outputSdf = new SimpleDateFormat("MM-dd", Locale.getDefault());
@@ -223,7 +223,9 @@ public class Publish_Task extends AppCompatActivity {
                     String content = TvContent.getText().toString().trim();
 
                     AddtoTaskList(formattedDate, startTime, content, endTime, ((Publish_Task) getActivity()).getUserIDFromPreferences(), number);
+                    ((Publish_Task) getActivity()).tvTaskPubliseDate.setText("已發布日期:"+ ((Publish_Task) getActivity()).getPublisherActiveTasks(((Publish_Task) getActivity()).getUserIDFromPreferences(),formattedDate));
                     showListFragment(formattedDate);
+
                 }
             };
             BtnAddTask.setOnClickListener(listener);
@@ -259,7 +261,7 @@ public class Publish_Task extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frag_publish_task, new MainActivity.MainNavigationFragment());
         fragmentTransaction.commit();
     }
-    private String getUserIDFromPreferences() {
+    public  String getUserIDFromPreferences() {
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         return sharedPreferences.getString("userid", "Default User");
     }
