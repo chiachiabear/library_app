@@ -68,16 +68,19 @@ public class TasksAdapter extends BaseAdapter {
             } else {
                 if (task.getNumber_of_recruits() == 0) {
                     btnAcceptTask.setText("已無餘額");
+                    btnAcceptTask.setTextColor(ContextCompat.getColor(context, R.color.colorExTask));
                 } else {
                     btnAcceptTask.setText("接受任務");
                 }
                 convertView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorDefaultTask));
             }
-            }else {
-                btnAcceptTask.setText("任務過期");
-                btnAcceptTask.setTextColor(ContextCompat.getColor(context, R.color.colorExTask));
+        } else {
+            if (activity.isUserTask(userId, Integer.parseInt(task.getTask_id()))) {
+                convertView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorAcceptedTask));
             }
-
+            btnAcceptTask.setText("任務過期");
+            btnAcceptTask.setTextColor(ContextCompat.getColor(context, R.color.colorExTask));
+        }
         btnAcceptTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

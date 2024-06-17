@@ -30,6 +30,7 @@ public class Task_list extends AppCompatActivity {
     private Button btnGotoPublish;
     private SQLiteDatabase productDatabase;
     private String formattedDate = "";
+    private String todayDate = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +44,8 @@ public class Task_list extends AppCompatActivity {
         btnGotoPublish = findViewById(R.id.btn_go_to_publish_task);
         Calendar currentDate = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        formattedDate = sdf.format(currentDate.getTime());
-        tvTaskListDate.setText(formattedDate+"任務清單");
+        todayDate = sdf.format(currentDate.getTime());
+        tvTaskListDate.setText(todayDate+"任務清單");
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
@@ -53,7 +54,6 @@ public class Task_list extends AppCompatActivity {
                 formattedDate = sdf.format(selectedDate.getTime());
                 tvTaskListDate.setText(formattedDate+"任務清單");
                 updateTaskList();
-
             }
 
         });
@@ -65,7 +65,7 @@ public class Task_list extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        tvNoteTask.setText("任務提醒:"+getUserActiveTasks(getUserIDFromPreferences(),formattedDate));
+        tvNoteTask.setText("任務提醒:"+getUserActiveTasks(getUserIDFromPreferences(),todayDate));
 
         showNavigationFragment();
     }
@@ -86,6 +86,7 @@ public class Task_list extends AppCompatActivity {
         cursor.close();
         TasksAdapter adapter = new TasksAdapter(this, tasks, getUserIDFromPreferences(), this);
         lvTask.setAdapter(adapter);
+        tvNoteTask.setText("任務提醒:"+getUserActiveTasks(getUserIDFromPreferences(),todayDate));
     }
     public void addToPersonalTasks(String receiverId, int taskId) {
         productDatabase.execSQL(
@@ -96,7 +97,6 @@ public class Task_list extends AppCompatActivity {
                 "UPDATE task_list SET number_of_recruits = number_of_recruits - 1 WHERE task_id = ?;",
                 new Object[]{taskId}
         );
-        tvNoteTask.setText("任務提醒:"+getUserActiveTasks(getUserIDFromPreferences(),formattedDate));
     }
 
     public void removeFromPersonalTasks(String receiverId, int taskId) {
@@ -108,7 +108,6 @@ public class Task_list extends AppCompatActivity {
                 "UPDATE task_list SET number_of_recruits = number_of_recruits + 1 WHERE task_id = ?;",
                 new Object[]{taskId}
         );
-        tvNoteTask.setText("任務提醒:"+getUserActiveTasks(getUserIDFromPreferences(),formattedDate));
     }
 
     public boolean isUserTask(String userId, int taskId) {
@@ -134,7 +133,6 @@ public class Task_list extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         SimpleDateFormat outputSdf = new SimpleDateFormat("MM-dd", Locale.getDefault());
 
-        // 查询使用者的任务且未过期的任务
         String query = "SELECT DISTINCT t.release_date " +
                 "FROM task_list t " +
                 "JOIN personal_tasks p ON t.task_id = p.task_id " +
@@ -146,7 +144,6 @@ public class Task_list extends AppCompatActivity {
             do {
                 String taskDate = cursor.getString(0);
                 try {
-                    // 解析日期并转换格式
                     String formattedDate = outputSdf.format(sdf.parse(taskDate));
                     activeTasks.append(formattedDate).append(" ");
                 } catch (Exception e) {
