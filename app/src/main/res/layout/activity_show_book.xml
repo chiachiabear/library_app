@@ -24,9 +24,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
-        <GridView
+         <GridView
+            android:id="@+id/g_view"
             android:layout_width="match_parent"
-            android:layout_height="492dp"
+            android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
@@ -56,7 +57,7 @@
             android:textSize="20sp" />
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/btn_set"
             android:layout_width="58dp"
             android:layout_height="57dp"
             android:layout_weight="1"
@@ -68,7 +69,7 @@
     <FrameLayout
         android:id="@+id/frag_show_book"
         android:layout_width="409dp"
-        android:layout_height="80dp"
+        android:layout_height="70dp"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
         app:layout_constraintBottom_toBottomOf="parent"

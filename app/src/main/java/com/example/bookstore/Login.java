@@ -58,12 +58,13 @@ public class Login extends AppCompatActivity {
 
         if (cursor != null && cursor.moveToFirst()) {
             String userId = cursor.getString(0);
-            Toast.makeText(this, "登录成功，用户ID：" + userId, Toast.LENGTH_LONG).show();
+            String userName = cursor.getString(2);
+            Toast.makeText(this, "登入成功，歡迎" + userName, Toast.LENGTH_LONG).show();
             saveUserIDToPreferences(userId);
             Intent intent = new Intent(Login.this, MainActivity.class);
             startActivity(intent);
         } else {
-            Toast.makeText(this, "登录失败，用户名或密码错误", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "登入失败，帳號或密碼錯誤", Toast.LENGTH_LONG).show();
         }
         if (cursor != null) {
             cursor.close();
