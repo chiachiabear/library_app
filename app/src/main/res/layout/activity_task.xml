@@ -34,7 +34,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="86dp" />
+        app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <ListView
         android:id="@+id/lv_task"
@@ -92,8 +92,11 @@
         android:id="@+id/tv_task_note"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp"
         android:text="任務提醒:"
+        app:layout_constraintBottom_toTopOf="@+id/frag_personal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="631dp" />
+        app:layout_constraintTop_toBottomOf="@+id/lv_task" />
 </androidx.constraintlayout.widget.ConstraintLayout>
