@@ -73,11 +73,13 @@ public class PublishTasksAdapter extends BaseAdapter{
 
                 } else {
                     activity.removeFromTaskList(userId, Integer.parseInt(task.getTask_id()));
+
                 }
 
                 if (listFragment != null) {
                     listFragment.updateTaskList();
                 }
+                activity.tvTaskPubliseDate.setText("已發布日期:"+activity.getPublisherActiveTasks(activity.getUserIDFromPreferences(),activity.formattedDate));
 
             }
         });

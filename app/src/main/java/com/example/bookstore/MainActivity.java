@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         Image2.setImageResource(R.drawable.green_seed);
         Image3.setImageResource(R.drawable.scallion_duck);
 
-        Cursor cursor = productDatabase.rawQuery("SELECT name,author,publication_date,introduction,book_type,publication,picture FROM books",null);
+        Cursor cursor = productDatabase.rawQuery("SELECT book_id,name,author,publication_date,introduction,book_type,publication,picture FROM books",null);
         cursor.moveToFirst();
 
         SearchBook(cursor);
