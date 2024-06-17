@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,19 +55,22 @@ public class show_book extends AppCompatActivity {
     }
 
     private void borrowhook() {
-        Cursor cursor = productDatabase.rawQuery("SELECT b.name, b.picture, bl.return_date " +
+        Cursor cursor = productDatabase.rawQuery("SELECT b.name, bl.return_date " +
                 "FROM books b " +
-                "INNER JOIN Borrowing_list bl ON b.book_id = bl.book_id", null);
+                "INNER JOIN user_borrowing bl ,users u ON b.book_id = bl.book_id and bl.borrowing_id=u.user_id", null);
+
         List<Book> books = new ArrayList<>();
-        if (cursor.moveToFirst()) {
+        if (cursor != null && cursor.moveToFirst()) {
             do {
-                String name = cursor.getString(cursor.getColumnIndex("name"));
-                int picture = cursor.getInt(cursor.getColumnIndex("picture"));
-                String returnDate = cursor.getString(cursor.getColumnIndex("return_date"));
-                books.add(new Book(name, returnDate, picture));
+                String bookName = cursor.getString(0);
+                String returnDate = cursor.getString(1);
+                Book book = new Book(bookName, returnDate, R.drawable.img01);
+                books.add(book);
             } while (cursor.moveToNext());
+            cursor.close();
+        }else {
+            Toast.makeText(this, "沒有書籍", Toast.LENGTH_LONG).show();
         }
-        cursor.close();
 
         BookAdapter adapter = new BookAdapter(this, books);
         gView.setAdapter(adapter);
@@ -131,21 +136,31 @@ public class show_book extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder holder;
             if (convertView == null) {
                 convertView = inflater.inflate(R.layout.activity_show_book_layout, parent, false);
+                holder = new ViewHolder();
+                holder.bookImage = convertView.findViewById(R.id.im_book);
+                holder.tvBookTitle = convertView.findViewById(R.id.tv_bookname);
+                holder.tvReturnDate = convertView.findViewById(R.id.tv_returndate);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
             }
-
-            ImageView bookImage = convertView.findViewById(R.id.im_book);
-            TextView tvBookTitle = convertView.findViewById(R.id.tv_bookname);
-            TextView tvReturnDate = convertView.findViewById(R.id.tv_returndate);
 
             Book book = books.get(position);
 
-            bookImage.setImageResource(book.getPicture());
-            tvBookTitle.setText(book.getName());
-            tvReturnDate.setText(book.getReturnDate());
+            holder.bookImage.setImageResource(book.getPicture());
+            holder.tvBookTitle.setText(book.getName());
+            holder.tvReturnDate.setText(book.getReturnDate());
 
             return convertView;
+        }
+
+        private class ViewHolder {
+            ImageView bookImage;
+            TextView tvBookTitle;
+            TextView tvReturnDate;
         }
     }
 

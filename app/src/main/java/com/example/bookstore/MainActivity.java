@@ -155,15 +155,7 @@ public class MainActivity extends AppCompatActivity {
                 "    book_type VARCHAR(255),\n" +
                 "    picture VARCHAR(30)\n" +
                 ");");
-        productDatabase.execSQL("CREATE TABLE IF NOT EXISTS Borrowing_list (\n" +
-                "    borrowing_id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-                "    book_id VARCHAR(10),\n" +
-                "    Borrower_id VARCHAR(20),\n" +
-                "    Borrowing_date DATE,\n" +
-                "    return_date DATE,\n" +
-                "    FOREIGN KEY (book_id) REFERENCES books(book_id),\n" +
-                "    FOREIGN KEY (Borrower_id) REFERENCES users(user_id)\n" +
-                ");");
+
 
         productDatabase.execSQL("CREATE TABLE IF NOT EXISTS task_list (\n" +
                 "    task_id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
